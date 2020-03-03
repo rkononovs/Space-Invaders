@@ -2,8 +2,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Title");
-
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Space Invaders");
 	sf::Event event;
 
 	while (window.isOpen()) {
