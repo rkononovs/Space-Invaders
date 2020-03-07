@@ -20,14 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Source\Characters.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Characters.h" />
     <ClInclude Include="Include\Enemy.h" />
     <ClInclude Include="Include\Player.h" />
+    <ClInclude Include="Include\ScreenInfo.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

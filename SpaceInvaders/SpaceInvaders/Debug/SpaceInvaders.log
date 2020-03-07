@@ -1,1 +1,9 @@
-﻿  SpaceInvaders.vcxproj -> C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\Debug\SpaceInvaders.exe
+﻿  Player.cpp
+C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\SpaceInvaders\Source\Player.cpp(44,27): warning C4305: '*=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+  main.cpp
+  Generating Code...
+  SpaceInvaders.vcxproj -> C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\Debug\SpaceInvaders.exe
