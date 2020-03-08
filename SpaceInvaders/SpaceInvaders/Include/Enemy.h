@@ -20,6 +20,9 @@ public:
 	bool isAlive();
 	void revive();
 	Type getType();
+
+	constexpr static float enemyWidth = 30.0f;
+	constexpr static float enemyHeight = 30.0f;
 private:
 	const sf::Vector2f startingPosition;
 	sf::Vector2f newPosition;

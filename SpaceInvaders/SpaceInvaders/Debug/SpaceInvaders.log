@@ -1,4 +1,2 @@
 ﻿  EnemyControler.cpp
-C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\SpaceInvaders\Source\EnemyControler.cpp(14,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\SpaceInvaders\Source\EnemyControler.cpp(15,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   SpaceInvaders.vcxproj -> C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\Debug\SpaceInvaders.exe

@@ -1,6 +1,6 @@
 #include "../Include/EnemyControler.h"
 
-EnemyControler::EnemyControler()
+EnemyControler::EnemyControler() : moveGap(sf::seconds(0.25f))
 {
 	Enemy::Type types[] = {
 		Enemy::Type::Squid, Enemy::Type::Crab, Enemy::Type::Crab,
@@ -11,8 +11,8 @@ EnemyControler::EnemyControler()
 	const int gapBetweenEnemies = 10;
 	for (int y = 0; y < 5; y++) { // Add enemies to the vector
 		for (int x = 0; x < 11; x++){
-			float enemyX = x * 40 + (gapBetweenEnemies * x * 3) + 40; // TODO Change 40 to invader width
-			float enemyY = y * 40 + (gapBetweenEnemies * y) + 40; // TODO Change 40 to invader height
+			float enemyX = x * 40 + (gapBetweenEnemies * x * 3) + Enemy::enemyWidth; // TODO Change 40 to invader width
+			float enemyY = y * 40 + (gapBetweenEnemies * y) + Enemy::enemyHeight; // TODO Change 40 to invader height
 			enemies.emplace_back(sf::Vector2f{ enemyX, enemyY }, types[y]);
 		}
 	}
@@ -20,6 +20,38 @@ EnemyControler::EnemyControler()
 
 void EnemyControler::moveEnemies()
 {
+	if (moveTimer.getElapsedTime() > moveGap) {
+		bool isMovingDown = false;
+		if (moveLeft) {
+			moveSpeed = -10.0f;
+		}
+		else if(!moveLeft)
+		{
+			moveSpeed = 10.0f;
+		}
+
+		if (moveDown) {
+			moveSpeed *= -1;
+		}
+
+		// Move every enemy
+		for (auto& Enemy : enemies) {
+			Enemy.moveEnemy(moveSpeed, 0.0f);
+			if (isMovingDown) {
+				Enemy.moveEnemy(0.0f, 20.0f); // TODO Later change 20 to variable 
+			}
+			else if (!isMovingDown) {
+				isMovingDown = ((Enemy.getPosition().x < 10 && moveLeft) || (Enemy.getPosition().x + Enemy::enemyWidth > Screen::width - 10 && !moveLeft));
+			}
+
+		}
+
+		if (moveDown) {
+			moveLeft = !moveLeft;
+		}
+		moveDown = isMovingDown;
+		moveTimer.restart();
+	}
 }
 
 void EnemyControler::drawEnemies(sf::RenderWindow& window)

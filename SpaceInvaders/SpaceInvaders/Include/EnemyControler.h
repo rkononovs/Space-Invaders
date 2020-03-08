@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Enemy.h"
+#include "ScreenInfo.h"
 
 #include <vector>
 
@@ -17,5 +18,12 @@ private:
 	int row = 5; // Later possible should be deleted
 	int column = 11; // Both...
 
+	bool moveDown = false;
+	bool moveLeft = false;
+
+	float moveSpeed;
+
+	sf::Clock moveTimer;
+	sf::Time moveGap;
 	std::vector<Enemy> enemies;
 };

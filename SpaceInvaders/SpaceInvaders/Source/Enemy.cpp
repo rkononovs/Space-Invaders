@@ -7,7 +7,7 @@ Enemy::Enemy(sf::Vector2f startingPosition, Type type) : newPosition(startingPos
 void Enemy::drawEnemy(sf::RenderWindow& window)
 {
 	sf::RectangleShape enemy;
-	enemy.setSize(sf::Vector2f(30.0f, 30.0f));
+	enemy.setSize(sf::Vector2f(enemyWidth, enemyHeight));
 	enemy.setPosition(newPosition);
 	enemy.setFillColor(sf::Color::Red);
 	window.draw(enemy);

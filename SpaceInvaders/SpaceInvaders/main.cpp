@@ -29,6 +29,7 @@ int main()
 		playerOne.getInput();
 		playerOne.updatePlayer();
 		Enemy.drawEnemies(window);
+		Enemy.moveEnemies();
 
 		window.display();
 	}
