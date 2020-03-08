@@ -24,31 +24,26 @@ void Player::drawPlayer(sf::RenderWindow& window)
 
 void Player::getInput()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
-	{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		playerVelocity.x -= speed;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
 		playerVelocity.x += speed;
 	}
 }
 
 void Player::updatePlayer() 
 {
-	if (isAlive) 
-	{
+	if (isAlive) {
 		auto halfWidth = player.getGlobalBounds().width / 2;
 		player.move(playerVelocity);
 		
-		playerVelocity.x *= 0.90;
-		if (player.getPosition().x - halfWidth <= 0) 
-		{
+		playerVelocity.x *= 0.90; // Decrease velocity so player won't move forever
+		if (player.getPosition().x - halfWidth <= 0) {
 			playerVelocity.x = 1.0f;
 			player.setPosition(-1.0f + halfWidth, baseHeight);
 		}
-		else if (player.getPosition().x + halfWidth >= Screen::width) 
-		{
+		else if (player.getPosition().x + halfWidth >= Screen::width) {
 			playerVelocity.x = -1.0f;
 			player.setPosition(Screen::width + 1.0f - halfWidth, baseHeight);
 		}

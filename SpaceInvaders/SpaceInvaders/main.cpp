@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Include/ScreenInfo.h"
 #include "Include/Player.h"
+#include "Include/EnemyControler.h"
 
 int main()
 {
@@ -8,6 +9,8 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(Screen::width, Screen::height), "Space Invaders");
 	sf::Event event;
 	Player playerOne;
+	EnemyControler Enemy;
+	
 
 	window.setFramerateLimit(60);
 
@@ -25,6 +28,7 @@ int main()
 		playerOne.drawPlayer(window);
 		playerOne.getInput();
 		playerOne.updatePlayer();
+		Enemy.drawEnemies(window);
 
 		window.display();
 	}

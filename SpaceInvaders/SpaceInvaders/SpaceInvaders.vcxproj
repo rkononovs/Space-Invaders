@@ -21,10 +21,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyControler.cpp" />
+    <ClCompile Include="Source\GameManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Enemy.h" />
+    <ClInclude Include="Include\EnemyControler.h" />
+    <ClInclude Include="Include\GameManager.h" />
     <ClInclude Include="Include\Player.h" />
     <ClInclude Include="Include\ScreenInfo.h" />
   </ItemGroup>
