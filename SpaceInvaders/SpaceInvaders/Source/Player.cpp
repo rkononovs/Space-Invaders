@@ -1,6 +1,5 @@
-#include <SFML/Graphics.hpp>
 #include "../Include/Player.h"
-#include "../Include/ScreenInfo.h"
+#include <iostream>	// DEBUING PURPOSES ! DELETE LATER !
 
 // Set player position base heigth to 40
 namespace
@@ -22,19 +21,21 @@ void Player::drawPlayer(sf::RenderWindow& window)
 	window.draw(player);
 }
 
-void Player::getInput()
+void Player::getMoveInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		std::cout << "LEFT" << std::endl; // DEBUING PURPOSES ! DELETE LATER !
 		playerVelocity.x -= speed;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+		std::cout << "RIGHT" << std::endl; // DEBUING PURPOSES ! DELETE LATER !
 		playerVelocity.x += speed;
 	}
 }
 
 void Player::updatePlayer() 
 {
-	if (isAlive) {
+	if (isPlayerAlive) {
 		auto halfWidth = player.getGlobalBounds().width / 2;
 		player.move(playerVelocity);
 		
@@ -48,4 +49,9 @@ void Player::updatePlayer()
 			player.setPosition(Screen::width + 1.0f - halfWidth, baseHeight);
 		}
 	}
+}
+
+const sf::Vector2f& Player::getPlayerPosition()
+{
+	return player.getPosition();
 }

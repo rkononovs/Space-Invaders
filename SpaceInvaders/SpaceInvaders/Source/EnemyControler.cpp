@@ -1,5 +1,4 @@
 #include "../Include/EnemyControler.h"
-#include <iostream> // DEBUGING PURPOSES ! DELETE LATER !
 
 EnemyControler::EnemyControler() : moveGap(sf::seconds(0.05f))
 {
@@ -40,12 +39,10 @@ void EnemyControler::moveEnemies()
 			Enemy.moveEnemy(moveSpeed, 0.0f);
 			if (moveDown) {
 				Enemy.moveEnemy(0.0f, 20.0f); // TODO Later change 20 to variable 
-				std::cout << Enemy.getPosition().y << std::endl; // DEBUGING PURPOSES ! DELETE LATER !
 			}
 			else if (!isMovingDown) {
 				isMovingDown = ((Enemy.getPosition().x < 10 && moveLeft) 
 					|| (Enemy.getPosition().x + Enemy::enemyWidth > Screen::width - 10 && !moveLeft));
-				std::cout << "It is: " << isMovingDown << std::endl;
 			}
 		}
 		if (moveDown) {
