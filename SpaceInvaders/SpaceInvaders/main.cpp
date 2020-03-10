@@ -28,9 +28,9 @@ int main()
 		/*playerOne.drawPlayer(window);*/
 		/*playerOne.getMoveInput();
 		game.getPlayerShootInput();*/
-		game.input();
 		game.draw(window);
 		game.input();
+		game.update();
 		/*playerOne.updatePlayer();
 		enemy.drawEnemies(window);
 		enemy.moveEnemies();*/
