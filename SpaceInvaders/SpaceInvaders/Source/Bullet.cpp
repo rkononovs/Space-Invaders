@@ -28,3 +28,7 @@ void Bullet::updateBullet()
 	float speed = bulletSpeed * (float)bulletDirection;
 	bulletPosition.y += speed;
 }
+
+bool Bullet::isBulletActive() {
+	return isActive;
+}

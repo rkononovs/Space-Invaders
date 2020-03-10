@@ -7,8 +7,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(Screen::width, Screen::height), "Space Invaders");
 	sf::Event event;
-	Player playerOne;
-	EnemyControler enemy;
+
 	GameManager game;
 	
 
@@ -25,15 +24,9 @@ int main()
 		}
 		window.clear(sf::Color::White);
 
-		/*playerOne.drawPlayer(window);*/
-		/*playerOne.getMoveInput();
-		game.getPlayerShootInput();*/
 		game.draw(window);
 		game.input();
 		game.update();
-		/*playerOne.updatePlayer();
-		enemy.drawEnemies(window);
-		enemy.moveEnemies();*/
 
 		window.display();
 	}

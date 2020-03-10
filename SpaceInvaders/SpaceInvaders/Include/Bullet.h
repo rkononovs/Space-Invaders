@@ -13,6 +13,8 @@ public:
 	void onCollide();
 	void updateBullet();
 
+	bool isBulletActive();
+
 	constexpr static float bulletWidth = 3.0f;
 	constexpr static float bulletHeight = 10.0f;
 private:

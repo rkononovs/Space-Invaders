@@ -17,7 +17,7 @@ public:
 	void update();
 private:
 	void enemyShoot();
-	
+
 	Player player;
 	EnemyControler enemy;
 
