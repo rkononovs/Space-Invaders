@@ -1,6 +1,6 @@
 #include "../Include/Enemy.h"
 
-Enemy::Enemy(sf::Vector2f startingPosition, Type type) : newPosition(startingPosition), enemyType(type), startingPosition(startingPosition)
+Enemy::Enemy(sf::Vector2f startingPosition, Type type) : Collidable(enemyWidth, enemyHeight), newPosition(startingPosition), enemyType(type), startingPosition(startingPosition)
 {
 }
 
@@ -18,7 +18,12 @@ void Enemy::moveEnemy(float x, float y)
 	newPosition += {x, y};
 }
 
-sf::Vector2f& Enemy::getPosition()
+void Enemy::onCollision(Collidable& object)
+{
+	isEnemyAlive = false;
+}
+
+const sf::Vector2f& Enemy::getSpritePosition()
 {
 	return newPosition;
 }

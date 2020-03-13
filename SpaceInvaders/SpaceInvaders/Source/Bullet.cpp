@@ -1,6 +1,6 @@
 #include "../Include/Bullet.h"
 
-Bullet::Bullet(sf::Vector2f& position, Direction direction) : bulletPosition(position), bulletDirection(direction)
+Bullet::Bullet(sf::Vector2f& position, Direction direction) : Collidable(bulletWidth, bulletHeight), bulletPosition(position), bulletDirection(direction)
 {
 }
 
@@ -18,7 +18,7 @@ void Bullet::destroy()
 	isActive = false;
 }
 
-void Bullet::onCollide()
+void Bullet::onCollision(Collidable& object)
 {
 	destroy();
 }
@@ -31,4 +31,9 @@ void Bullet::updateBullet()
 
 bool Bullet::isBulletActive() {
 	return isActive;
+}
+
+const sf::Vector2f& Bullet::getSpritePosition()
+{
+	return bulletPosition;
 }

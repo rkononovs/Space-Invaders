@@ -1,6 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-class Bullet
+
+#include "../Include/Collidable.h"
+/*
+	Class for single bullet
+*/
+class Bullet : public Collidable
 {
 public:
 	enum class Direction {
@@ -10,10 +15,11 @@ public:
 	Bullet(sf::Vector2f& position, Direction direction);
 	void drawBullet(sf::RenderWindow& window);
 	void destroy();
-	void onCollide();
+	void onCollision(Collidable& object);
 	void updateBullet();
-
 	bool isBulletActive();
+
+	const sf::Vector2f& getSpritePosition();
 
 	constexpr static float bulletWidth = 3.0f;
 	constexpr static float bulletHeight = 10.0f;

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Enemy.h"
-#include "ScreenInfo.h"
+#include "../Include/Enemy.h"
+#include "../Include/ScreenInfo.h"
+#include "../Include/Bullet.h"
 
 #include <vector>
 
@@ -13,10 +14,16 @@ public:
 
 	void moveEnemies();
 	void drawEnemies(sf::RenderWindow& window);
+	std::vector<sf::Vector2f> bulletCollision(std::vector<Bullet>& bullets);
 
 private:
+	const int gapBetweenEnemies = 10;
+
 	int row = 5; // Later possible should be deleted
 	int column = 11; // Both...
+	int aliveEnemies = row * column; // Maybe refracture
+	int stepDown; // DEBUGING PURPOSES ! DELETE LATER !
+	int steps; // DEBUGING PURPOSES ! DELETE LATER !
 
 	bool moveDown = false;
 	bool moveLeft = false;
@@ -24,6 +31,6 @@ private:
 	float moveSpeed;
 
 	sf::Clock moveTimer;
-	sf::Time moveGap;
+	sf::Time moveTimeGap;
 	std::vector<Enemy> enemies;
 };

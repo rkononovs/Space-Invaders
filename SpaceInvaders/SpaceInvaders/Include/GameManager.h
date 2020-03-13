@@ -17,6 +17,8 @@ public:
 	void update();
 private:
 	void enemyShoot();
+	void updateBullet(std::vector<sf::Vector2f>& collisionPoint);
+	std::vector<sf::Vector2f> getCollisionPoints();
 
 	Player player;
 	EnemyControler enemy;

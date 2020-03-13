@@ -1,6 +1,7 @@
 #include "../Include/EnemyControler.h"
+#include <iostream> // DEBUGING PURPOSES ! DELETE LATER !
 
-EnemyControler::EnemyControler() : moveGap(sf::seconds(0.05f))
+EnemyControler::EnemyControler() : moveTimeGap(sf::seconds(0.75f))
 {
 	Enemy::Type types[] = {
 		Enemy::Type::Squid, Enemy::Type::Crab, Enemy::Type::Crab,
@@ -8,7 +9,6 @@ EnemyControler::EnemyControler() : moveGap(sf::seconds(0.05f))
 	};
 
 
-	const int gapBetweenEnemies = 10;
 	for (int y = 0; y < 5; y++) { // Add enemies to the vector
 		for (int x = 0; x < 11; x++){
 			float enemyX = x * 40 + (gapBetweenEnemies * x * 3) + Enemy::enemyWidth; // TODO Change 40 to invader width
@@ -20,7 +20,8 @@ EnemyControler::EnemyControler() : moveGap(sf::seconds(0.05f))
 
 void EnemyControler::moveEnemies()
 {
-	if (moveTimer.getElapsedTime() > moveGap) {
+	if (moveTimer.getElapsedTime() > moveTimeGap) {
+		steps++; // DEBUGING PURPOSES ! DELETE LATER !
 		bool isMovingDown = false;
 		if (moveLeft) {
 			moveSpeed = -10.0f;
@@ -35,19 +36,20 @@ void EnemyControler::moveEnemies()
 		}
 
 		// Move every enemy
-		for (auto& Enemy : enemies) {
-			Enemy.moveEnemy(moveSpeed, 0.0f);
+		for (auto& enemy : enemies) {
+			enemy.moveEnemy(moveSpeed, 0.0f);
 			if (moveDown) {
-				Enemy.moveEnemy(0.0f, 20.0f); // TODO Later change 20 to variable 
+				enemy.moveEnemy(0.0f, 20.0f); // TODO Later change 20 to variable 
 			}
 			else if (!isMovingDown) {
-				isMovingDown = ((Enemy.getPosition().x < 10 && moveLeft) 
-					|| (Enemy.getPosition().x + Enemy::enemyWidth > Screen::width - 10 && !moveLeft));
+				isMovingDown = ((enemy.getSpritePosition().x < 10 && moveLeft) 
+					|| (enemy.getSpritePosition().x + Enemy::enemyWidth > Screen::width - 10 && !moveLeft));
 			}
 		}
 		if (moveDown) {
 			moveLeft = !moveLeft;
 		}
+		std::cout << "Horizontal steps: " << steps << std::endl; // DEBUGING PURPOSES ! DELETE LATER !
 		moveDown = isMovingDown;
 		moveTimer.restart();
 	}
@@ -55,7 +57,22 @@ void EnemyControler::moveEnemies()
 
 void EnemyControler::drawEnemies(sf::RenderWindow& window)
 {
-	for (auto& Enemy : enemies) {
-		Enemy.drawEnemy(window);
+	for (auto& enemy : enemies) {
+		enemy.drawEnemy(window);
 	}
+}
+
+std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& bullets)
+{
+	std::vector<sf::Vector2f> killedEnemyPosition;
+	for (auto& bullet : bullets) {
+		for (auto& enemy : enemies) {
+			if (bullet.isColliding(enemy)) {
+				aliveEnemies--;
+				killedEnemyPosition.emplace_back(enemy.getSpritePosition());
+			}
+		}
+	}
+
+	return killedEnemyPosition;
 }

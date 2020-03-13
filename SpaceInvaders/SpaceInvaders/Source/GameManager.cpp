@@ -16,13 +16,31 @@ void GameManager::getPlayerShootInput()
 {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			std::cout << "SHOOT" << std::endl; // DEBUGING PURPOSES ! DELETE LATER 
-			auto playerPosition = player.getPlayerPosition();
+			auto playerPosition = player.getSpritePosition();
 			bullets.emplace_back(playerPosition, Bullet::Direction::Up);
 		}
 }
 
 void GameManager::enemyShoot()
 {
+}
+
+void GameManager::updateBullet(std::vector<sf::Vector2f>& collisionPoint)
+{
+	for (auto iterator = bullets.begin(); iterator != bullets.end();) {
+		auto& bullet = *iterator;
+		if (!bullet.isBulletActive()) {
+			iterator = bullets.erase(iterator);
+		}
+	}
+}
+
+std::vector<sf::Vector2f> GameManager::getCollisionPoints()
+{
+	auto collisionPoint = enemy.bulletCollision(bullets);
+	updateBullet(collisionPoint);
+	
+	return collisionPoint;
 }
 
 
@@ -41,6 +59,8 @@ void GameManager::draw(sf::RenderWindow& window)
 
 void GameManager::update()
 {
+	// auto collisionResults = getCollisionPoints();
+
 	player.updatePlayer();
 	enemy.moveEnemies();
 }

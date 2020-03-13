@@ -1,11 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
+#include "../Include/Collidable.h"
 /*
 	Class for single enemy
 */
-
-
-class Enemy
+class Enemy : public Collidable
 {
 public:
 	enum class Type // enum for different looking enemies
@@ -15,18 +15,21 @@ public:
 	Enemy(sf::Vector2f startingPosition, Type type);
 	void drawEnemy(sf::RenderWindow& window);
 	void moveEnemy(float x, float y);
-	sf::Vector2f& getPosition();
-
-	bool isAlive();
+	void onCollision(Collidable& object);
 	void revive();
+	bool isAlive();
+
 	Type getType();
+
+	const sf::Vector2f& getSpritePosition();
 
 	constexpr static float enemyWidth = 30.0f;
 	constexpr static float enemyHeight = 30.0f;
 private:
-	const sf::Vector2f startingPosition;
-	sf::Vector2f newPosition;
 	bool isEnemyAlive = false;
+
+	sf::Vector2f newPosition;
 	Type enemyType;
 
+	const sf::Vector2f startingPosition;
 };

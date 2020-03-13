@@ -1,16 +1,10 @@
 #include "../Include/Player.h"
 #include <iostream>	// DEBUING PURPOSES ! DELETE LATER !
 
-// Set player position base heigth to 40
-namespace
-{
-	constexpr float baseHeight = (float)Screen::height - 40.0f;
-}
-
 // Set initial player parameters
-Player::Player()
+Player::Player() : Collidable(playerWidth, playerHeight)
 {
-	player.setSize(sf::Vector2f(30.0f, 30.0f));
+	player.setSize(sf::Vector2f(playerWidth, playerHeight));
 	player.setOrigin(player.getSize().x / 2.0f, player.getSize().y / 2.0f);
 	player.setPosition(Screen::width / 2, baseHeight);
 	player.setFillColor(sf::Color::Green);
@@ -51,7 +45,11 @@ void Player::updatePlayer()
 	}
 }
 
-const sf::Vector2f& Player::getPlayerPosition()
+void Player::onCollision(Collidable& object)
+{
+}
+
+const sf::Vector2f& Player::getSpritePosition()
 {
 	return player.getPosition();
 }
