@@ -18,7 +18,8 @@ sf::FloatRect Collidable::getCollisionBox()
 bool Collidable::isColliding(Collidable& object)
 {
 	if (getCollisionBox().intersects(object.getCollisionBox())) {
-		isColliding(object);
+		onCollision(object);
+		object.onCollision(*this);
 		return true;
 	}
 	return false;

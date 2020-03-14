@@ -59,7 +59,7 @@ void GameManager::draw(sf::RenderWindow& window)
 
 void GameManager::update()
 {
-	// auto collisionResults = getCollisionPoints();
+	auto collisions = enemy.bulletCollision(bullets);
 
 	player.updatePlayer();
 	enemy.moveEnemies();

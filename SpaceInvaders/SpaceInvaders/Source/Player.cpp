@@ -1,5 +1,4 @@
 #include "../Include/Player.h"
-#include <iostream>	// DEBUING PURPOSES ! DELETE LATER !
 
 // Set initial player parameters
 Player::Player() : Collidable(playerWidth, playerHeight)
@@ -18,11 +17,9 @@ void Player::drawPlayer(sf::RenderWindow& window)
 void Player::getMoveInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		std::cout << "LEFT" << std::endl; // DEBUING PURPOSES ! DELETE LATER !
 		playerVelocity.x -= speed;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-		std::cout << "RIGHT" << std::endl; // DEBUING PURPOSES ! DELETE LATER !
 		playerVelocity.x += speed;
 	}
 }

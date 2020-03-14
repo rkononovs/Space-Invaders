@@ -19,6 +19,7 @@ public:
 	void revive();
 	bool isAlive();
 
+	sf::FloatRect getCollisionBox();
 	Type getType();
 
 	const sf::Vector2f& getSpritePosition();
@@ -26,7 +27,7 @@ public:
 	constexpr static float enemyWidth = 30.0f;
 	constexpr static float enemyHeight = 30.0f;
 private:
-	bool isEnemyAlive = false;
+	bool isEnemyAlive = true;
 
 	sf::Vector2f newPosition;
 	Type enemyType;
