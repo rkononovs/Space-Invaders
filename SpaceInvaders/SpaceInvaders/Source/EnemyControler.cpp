@@ -62,6 +62,43 @@ void EnemyControler::drawEnemies(sf::RenderWindow& window)
 	}
 }
 
+void EnemyControler::destroyEnemy()
+{
+	for (auto iterator = begin(enemies); iterator != end(enemies);) {
+		auto& enemy = *iterator;
+		if (enemy.isAlive()) {
+			iterator++;
+		}
+		else {
+			iterator = enemies.erase(iterator);
+		}
+	}
+}
+
+bool EnemyControler::checkBulletCollisions(std::vector<Bullet>& bullets) {
+	for (auto& bullet : bullets) {
+		for (auto& enemy : enemies) {
+			if (bullet.isColliding(enemy)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+}
+
+/* for (auto iterator = begin(bullets); iterator != end(bullets);) {
+	auto& bullet = *iterator;
+	if (bullet.isBulletActive()) {
+		bullet.updateBullet();
+		iterator++;
+	}
+	else {
+		iterator = bullets.erase(iterator);
+	}
+}  */
+
 std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& bullets)
 {
 	std::vector<sf::Vector2f> killedEnemyPosition;

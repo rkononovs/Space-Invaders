@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "../Include/ScreenInfo.h"
 #include "../Include/Collidable.h"
 /*
 	Class for single bullet

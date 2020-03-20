@@ -32,5 +32,5 @@ private:
 	sf::Vector2f newPosition;
 	Type enemyType;
 
-	const sf::Vector2f startingPosition;
+	sf::Vector2f startingPosition;
 };

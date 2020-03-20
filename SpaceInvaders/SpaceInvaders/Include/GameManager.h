@@ -17,14 +17,17 @@ public:
 	void update();
 private:
 	void enemyShoot();
-	void updateBullet(std::vector<sf::Vector2f>& collisionPoint);
+	void updateBullet();
+
 	std::vector<sf::Vector2f> getCollisionPoints();
+
+	bool isGameOver = false;
 
 	Player player;
 	EnemyControler enemy;
 
-	std::vector<Bullet> bullets;
+	sf::Clock playerShotDelay;
 
-	bool isGameOver = false;
+	std::vector<Bullet> bullets;
 
 };

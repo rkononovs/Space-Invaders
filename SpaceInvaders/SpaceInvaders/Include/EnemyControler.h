@@ -14,6 +14,8 @@ public:
 
 	void moveEnemies();
 	void drawEnemies(sf::RenderWindow& window);
+	void destroyEnemy();
+	bool checkBulletCollisions(std::vector<Bullet>& bullets);
 	std::vector<sf::Vector2f> bulletCollision(std::vector<Bullet>& bullets);
 
 private:
