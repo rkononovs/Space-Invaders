@@ -1,4 +1,5 @@
 #include "../Include/EnemyControler.h"
+#include <stdlib.h> // For rand() function
 #include <iostream> // DEBUGING PURPOSES ! DELETE LATER !
 
 EnemyControler::EnemyControler() : moveTimeGap(sf::seconds(0.75f))
@@ -9,8 +10,8 @@ EnemyControler::EnemyControler() : moveTimeGap(sf::seconds(0.75f))
 	};
 
 
-	for (int y = 0; y < 5; y++) { // Add enemies to the vector
-		for (int x = 0; x < 11; x++){
+	for (int y = 0; y < row; y++) { // Add enemies to the vector
+		for (int x = 0; x < column; x++){
 			float enemyX = x * 40 + (gapBetweenEnemies * x * 3) + Enemy::enemyWidth; // TODO Change 40 to invader width
 			float enemyY = y * 40 + (gapBetweenEnemies * y) + Enemy::enemyHeight; // TODO Change 40 to invader height
 			enemies.emplace_back(sf::Vector2f{ enemyX, enemyY }, types[y]);
@@ -62,7 +63,7 @@ void EnemyControler::drawEnemies(sf::RenderWindow& window)
 	}
 }
 
-void EnemyControler::destroyEnemy()
+/*void EnemyControler::destroyEnemy()                   /// For now I don't need this function, but I may use it later.
 {
 	for (auto iterator = begin(enemies); iterator != end(enemies);) {
 		auto& enemy = *iterator;
@@ -70,19 +71,43 @@ void EnemyControler::destroyEnemy()
 			iterator++;
 		}
 		else {
+			std::cout << "Enemy Destroyed" << std::endl;
 			iterator = enemies.erase(iterator);
 		}
 	}
-}
+}*/ 
 
 bool EnemyControler::checkBulletCollisions(std::vector<Bullet>& bullets) {
 	for (auto& bullet : bullets) {
 		for (auto& enemy : enemies) {
-			if (bullet.isColliding(enemy)) {
-				return true;
+			if (enemy.isAlive()) {
+				if (bullet.isColliding(enemy)) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 			else {
-				return false;
+				false;
+			}
+		}
+	}
+}
+
+sf::Vector2f EnemyControler::randomLowestEnemyPosition()
+{
+	while (true) {
+		int enemyRandColumn = rand() % column;
+		for (int y = row - 1; y >= 0; y--) {
+			int index = y * column + enemyRandColumn;
+			auto& enemy = enemies.at(index);
+			if (enemy.isAlive()) {
+				return
+				{
+					enemy.getSpritePosition().x + enemy.enemyWidth / 2,
+					enemy.getSpritePosition().y + enemy.enemyHeight + 5
+				};
 			}
 		}
 	}
@@ -104,9 +129,11 @@ std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& b
 	std::vector<sf::Vector2f> killedEnemyPosition;
 	for (auto& bullet : bullets) {
 		for (auto& enemy : enemies) {
-			if (bullet.isColliding(enemy)) {
-				aliveEnemies--;
-				killedEnemyPosition.emplace_back(enemy.getSpritePosition());
+			if (enemy.isAlive()) {
+				if (bullet.isColliding(enemy)) {
+					aliveEnemies--;
+					killedEnemyPosition.emplace_back(enemy.getSpritePosition());
+				}
 			}
 		}
 	}

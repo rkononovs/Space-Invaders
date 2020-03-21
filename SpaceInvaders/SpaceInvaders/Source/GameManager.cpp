@@ -8,8 +8,10 @@ GameManager::GameManager()
 
 void GameManager::input()
 {
-	player.getMoveInput();
-	getPlayerShootInput();
+	//if (player.isAlive()) {
+		player.getMoveInput();
+		getPlayerShootInput();
+	//}
 }
 
 void GameManager::getPlayerShootInput()
@@ -25,23 +27,18 @@ void GameManager::getPlayerShootInput()
 
 void GameManager::enemyShoot()
 {
+	if (enemyShotDelay.getElapsedTime().asSeconds() > 0.25f && (rand() % 60 == 5)) {
+		sf::Vector2f point = enemy.randomLowestEnemyPosition();
+		bullets.emplace_back(point, Bullet::Direction::Down);
+		enemyShotDelay.restart();
+	}
 }
 
 void GameManager::updateBullet()
 {
-	/*for (auto iterator = bullets.begin(); iterator != bullets.end();) {
-		auto& bullet = *iterator;
-		if (bullet.isBulletActive()) {
-			// Nothing
-		}
-		else {
-			bullets.erase(iterator);
-		}
-	}*/
-
 	for (auto iterator = begin(bullets); iterator != end(bullets);) {
 		auto& bullet = *iterator;
-		if (bullet.isBulletActive()) {
+ 		if (bullet.isBulletActive()) {
 			bullet.updateBullet();
 			iterator++;
 		}
@@ -55,10 +52,10 @@ std::vector<sf::Vector2f> GameManager::getCollisionPoints()
 {
 	auto collisionPoint = enemy.bulletCollision(bullets);
 
-	if (enemy.checkBulletCollisions(bullets)) {
-		enemy.destroyEnemy();
-		// playerShotDelay.restart();
-	}
+//	if (enemy.checkBulletCollisions(bullets)) {
+		//enemy.destroyEnemy();
+		//playerShotDelay.restart();
+//	}
 	updateBullet();
 	
 	return collisionPoint;
@@ -79,11 +76,7 @@ void GameManager::draw(sf::RenderWindow& window)
 
 void GameManager::update()
 {
-	/*auto collisions = enemy.bulletCollision(bullets);
-	for (auto& Bullet : bullets) {
-		updateBullet();
-	}*/
-	// enemy.destroyEnemy();
+	enemyShoot();
 	getCollisionPoints();
 
 	player.updatePlayer();

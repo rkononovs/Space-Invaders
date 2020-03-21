@@ -39,12 +39,15 @@ void Player::updatePlayer()
 			playerVelocity.x = -1.0f;
 			player.setPosition(Screen::width + 1.0f - halfWidth, baseHeight);
 		}
+
 	}
 }
 
 void Player::onCollision(Collidable& object)
 {
+	// isPlayerAlive = false;
 }
+
 
 const sf::Vector2f& Player::getSpritePosition()
 {

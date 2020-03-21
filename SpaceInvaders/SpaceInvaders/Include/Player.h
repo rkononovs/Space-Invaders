@@ -14,6 +14,9 @@ public:
 	void getMoveInput();
 	void updatePlayer();
 	void onCollision(Collidable& object);
+	void revivePlayer();
+
+	//bool isAlive();
 
 	const sf::Vector2f& getSpritePosition();
 

@@ -26,6 +26,8 @@ public:
 
 	constexpr static float enemyWidth = 30.0f;
 	constexpr static float enemyHeight = 30.0f;
+
+
 private:
 	bool isEnemyAlive = true;
 

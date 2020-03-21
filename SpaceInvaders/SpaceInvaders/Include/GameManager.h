@@ -26,6 +26,7 @@ private:
 	Player player;
 	EnemyControler enemy;
 
+	sf::Clock enemyShotDelay;
 	sf::Clock playerShotDelay;
 
 	std::vector<Bullet> bullets;
