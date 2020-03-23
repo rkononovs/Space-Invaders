@@ -31,8 +31,8 @@ public:
 private:
 	bool isEnemyAlive = true;
 
-	sf::Vector2f newPosition;
-	Type enemyType;
-
 	sf::Vector2f startingPosition;
+	sf::Vector2f newPosition;
+
+	Type enemyType;
 };

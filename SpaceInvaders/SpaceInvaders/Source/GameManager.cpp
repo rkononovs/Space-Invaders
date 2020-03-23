@@ -8,18 +8,22 @@ GameManager::GameManager()
 
 void GameManager::input()
 {
-	//if (player.isAlive()) {
+	if (player.isAlive()) {
 		player.getMoveInput();
 		getPlayerShootInput();
-	//}
+	}
+	else {
+		player.revivePlayer();
+	}
 }
 
 void GameManager::getPlayerShootInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && playerShotDelay.getElapsedTime().asSeconds() > 1.0f) {
 			std::cout << "SHOOT" << std::endl; // DEBUGING PURPOSES ! DELETE LATER 
-			auto playerPosition = player.getSpritePosition();
-			bullets.emplace_back(playerPosition, Bullet::Direction::Up);
+			auto bulletPosition = player.getSpritePosition();
+			bulletPosition.y -= 10; // Change y so bullet doesn't spawn inside player and kill him
+			bullets.emplace_back(bulletPosition, Bullet::Direction::Up);
 			std::cout << playerShotDelay.getElapsedTime().asSeconds() << std::endl;
 			playerShotDelay.restart();
 		}
@@ -39,6 +43,10 @@ void GameManager::updateBullet()
 	for (auto iterator = begin(bullets); iterator != end(bullets);) {
 		auto& bullet = *iterator;
  		if (bullet.isBulletActive()) {
+			if (bullet.isColliding(player)) {
+				bullets.clear();
+				return;
+			}
 			bullet.updateBullet();
 			iterator++;
 		}
@@ -51,7 +59,7 @@ void GameManager::updateBullet()
 std::vector<sf::Vector2f> GameManager::getCollisionPoints()
 {
 	auto collisionPoint = enemy.bulletCollision(bullets);
-
+	auto blockadeCollision = blockade.bulletCollision(bullets);
 //	if (enemy.checkBulletCollisions(bullets)) {
 		//enemy.destroyEnemy();
 		//playerShotDelay.restart();
@@ -70,8 +78,11 @@ void GameManager::draw(sf::RenderWindow& window)
 			Bullet.drawBullet(window);
 		}
 	}
-	player.drawPlayer(window);
+	if (player.isAlive()) {
+		player.drawPlayer(window);
+	}
 	enemy.drawEnemies(window);
+	blockade.drawBlockades(window);
 }
 
 void GameManager::update()

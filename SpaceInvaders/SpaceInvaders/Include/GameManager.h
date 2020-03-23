@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "BlockadesControler.h"
 #include "EnemyControler.h"
 #include "Player.h"
 #include "Bullet.h"
@@ -25,6 +26,7 @@ private:
 
 	Player player;
 	EnemyControler enemy;
+	BlockadesControler blockade;
 
 	sf::Clock enemyShotDelay;
 	sf::Clock playerShotDelay;

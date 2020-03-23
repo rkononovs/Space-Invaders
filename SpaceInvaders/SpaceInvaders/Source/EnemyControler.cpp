@@ -63,7 +63,7 @@ void EnemyControler::drawEnemies(sf::RenderWindow& window)
 	}
 }
 
-/*void EnemyControler::destroyEnemy()                   /// For now I don't need this function, but I may use it later.
+/*void EnemyControler::destroyEnemy()                   /// For now I don't need this function, but I may use it later. ///
 {
 	for (auto iterator = begin(enemies); iterator != end(enemies);) {
 		auto& enemy = *iterator;

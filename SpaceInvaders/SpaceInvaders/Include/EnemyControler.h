@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../Include/Enemy.h"
 #include "../Include/ScreenInfo.h"
 #include "../Include/Bullet.h"

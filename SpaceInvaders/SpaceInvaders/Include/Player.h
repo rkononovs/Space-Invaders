@@ -6,6 +6,7 @@
 /*
 	Class for the player
 */
+
 class Player : public Collidable
 {
 public:
@@ -16,7 +17,7 @@ public:
 	void onCollision(Collidable& object);
 	void revivePlayer();
 
-	//bool isAlive();
+	bool isAlive();
 
 	const sf::Vector2f& getSpritePosition();
 
@@ -27,6 +28,7 @@ private:
 	sf::Vector2f playerVelocity;
 
 	float baseHeight = (float)Screen::height - 40.0f; // Set player position base heigth to 40
+
 
 	bool isPlayerAlive = true;
 	int speed = 1;
