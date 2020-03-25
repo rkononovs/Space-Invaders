@@ -140,3 +140,5 @@ std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& b
 
 	return killedEnemyPosition;
 }
+
+// Fix collision box

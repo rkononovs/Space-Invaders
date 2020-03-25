@@ -26,8 +26,9 @@ std::vector<sf::Vector2f> BlockadesControler::bulletCollision(std::vector<Bullet
 	std::vector<sf::Vector2f> attackedBlockadePosition;
 	for (auto& bullet : bullets) {
 		for (auto& blockade : blockades) {
-			if (bullet.isColliding(blockade)) {
-				std::cout << "Blockade colliding" << std::endl;
+			if (blockade.isActive()) {
+				if (bullet.isColliding(blockade)) {
+				}
 			}
 		}
 	}

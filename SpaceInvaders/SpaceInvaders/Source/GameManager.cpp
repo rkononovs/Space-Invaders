@@ -31,7 +31,7 @@ void GameManager::getPlayerShootInput()
 
 void GameManager::enemyShoot()
 {
-	if (enemyShotDelay.getElapsedTime().asSeconds() > 0.25f && (rand() % 60 == 5)) {
+	if (enemyShotDelay.getElapsedTime().asSeconds() > 0.25f && (rand() % 10 == 5)) {
 		sf::Vector2f point = enemy.randomLowestEnemyPosition();
 		bullets.emplace_back(point, Bullet::Direction::Down);
 		enemyShotDelay.restart();
