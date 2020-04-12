@@ -22,7 +22,8 @@ void GameManager::getPlayerShootInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && playerShotDelay.getElapsedTime().asSeconds() > 1.0f) {
 			std::cout << "SHOOT" << std::endl; // DEBUGING PURPOSES ! DELETE LATER 
 			auto bulletPosition = player.getSpritePosition();
-			bulletPosition.y -= 10; // Change y so bullet doesn't spawn inside player and kill him
+			bulletPosition.y -= Bullet::bulletHeight; // Change y so bullet doesn't spawn inside player and kill him
+			bulletPosition.x += player.playerWidth / 2; // Change x so bullet shoots from middle
 			bullets.emplace_back(bulletPosition, Bullet::Direction::Up);
 			std::cout << playerShotDelay.getElapsedTime().asSeconds() << std::endl;
 			playerShotDelay.restart();
