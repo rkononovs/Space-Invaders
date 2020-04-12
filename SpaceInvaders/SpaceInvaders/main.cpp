@@ -23,7 +23,7 @@ int main()
 				window.close();
 			}
 		}
-		window.clear(sf::Color::White);
+		window.clear(sf::Color::Black);
 
 		game.draw(window);
 		game.input();

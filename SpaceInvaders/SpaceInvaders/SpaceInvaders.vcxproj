@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source\Animator.cpp" />
     <ClCompile Include="Source\Blockade.cpp" />
     <ClCompile Include="Source\BlockadesControler.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
@@ -28,8 +29,10 @@
     <ClCompile Include="Source\EnemyControler.cpp" />
     <ClCompile Include="Source\GameManager.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Animator.h" />
     <ClInclude Include="Include\Blockade.h" />
     <ClInclude Include="Include\BlockadesControler.h" />
     <ClInclude Include="Include\Bullet.h" />
@@ -38,6 +41,7 @@
     <ClInclude Include="Include\EnemyControler.h" />
     <ClInclude Include="Include\GameManager.h" />
     <ClInclude Include="Include\Player.h" />
+    <ClInclude Include="Include\ResourceManager.h" />
     <ClInclude Include="Include\ScreenInfo.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
