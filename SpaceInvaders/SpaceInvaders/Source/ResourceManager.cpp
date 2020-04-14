@@ -1,9 +1,9 @@
-
 #include "..\Include\ResourceManager.h"
+#include <iostream>
 
-const sf::Texture* ResourceManager::loadTexture(std::string fileName)
+sf::Texture& ResourceManager::loadTexture(const std::string& fileName)
 {
 	textures.loadFromFile(".\\Sprites\\" + fileName + ".png");
-
-	return& textures;
+	return textures;
 }
+//enemyResourceManager.loadTexture("enemySheet")

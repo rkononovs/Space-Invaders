@@ -1,5 +1,7 @@
-﻿  Animator.cpp
+﻿  Blockade.cpp
+  EnemyControler.cpp
   GameManager.cpp
-  ResourceManager.cpp
+  main.cpp
   Generating Code...
+C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\SpaceInvaders\Source\EnemyControler.cpp(100): warning C4715: 'EnemyControler::checkBulletCollisions': not all control paths return a value
   SpaceInvaders.vcxproj -> C:\Users\roma0\Documents\GitHub\Space-Invaders\SpaceInvaders\Debug\SpaceInvaders.exe

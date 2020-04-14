@@ -7,7 +7,7 @@ Player::Player() : Collidable(playerWidth, playerHeight)
 	//player.setOrigin(player.getSize().x / 2.0f, player.getSize().y / 2.0f);
 	player.setPosition(Screen::width / 2, baseHeight);
 	player.setFillColor(sf::Color::Green);
-	player.setTexture(resourceManager.loadTexture("Player"));
+	player.setTexture(&playerResourceManager.loadTexture("Player"));
 }
 
 void Player::drawPlayer(sf::RenderWindow& window)

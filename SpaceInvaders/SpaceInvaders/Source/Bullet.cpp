@@ -11,7 +11,7 @@ void Bullet::drawBullet(sf::RenderWindow& window)
 	sf::RectangleShape bullet;
 	bullet.setSize(sf::Vector2f(bulletWidth, bulletHeight));
 	bullet.setPosition(bulletPosition);
-	bullet.setFillColor(sf::Color::Red);
+	bullet.setFillColor(sf::Color::White);
 	window.draw(bullet);
 }
 

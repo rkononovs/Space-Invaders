@@ -2,6 +2,8 @@
 #include "../Include/Enemy.h"
 #include "../Include/ScreenInfo.h"
 #include "../Include/Bullet.h"
+#include "../Include/Animator.h"
+#include "../Include/ResourceManager.h"
 
 #include <vector>
 
@@ -17,6 +19,7 @@ public:
 	sf::Vector2f randomLowestEnemyPosition();
 	std::vector<sf::Vector2f> bulletCollision(std::vector<Bullet>& bullets);
 
+	ResourceManager enemyResourceManager;
 private:
 	const int gapBetweenEnemies = 10;
 
@@ -33,5 +36,6 @@ private:
 
 	sf::Clock moveTimer;
 	sf::Time moveTimeGap;
+	Animator enemyAnimator;
 	std::vector<Enemy> enemies;
 };

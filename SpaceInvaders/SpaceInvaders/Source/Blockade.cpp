@@ -5,7 +5,7 @@ Blockade::Blockade(sf::Vector2f startingPosition) : Collidable(blockadesWidth, b
 {
 	blockade.setSize(sf::Vector2f(blockadesWidth, blockadesHeight));
 	blockade.setPosition(newPosition);
-	blockade.setFillColor(sf::Color::Red);
+	blockade.setFillColor(sf::Color::Green);
 }
 
 void Blockade::onCollision(Collidable& other)
@@ -17,7 +17,7 @@ void Blockade::onCollision(Collidable& other)
 		isBlockadeActive = false;
 	}
 	else if (healthLeft == 1) {
-		blockade.setFillColor(sf::Color::Green);
+		blockade.setFillColor(sf::Color::White);
 	}
 
 }

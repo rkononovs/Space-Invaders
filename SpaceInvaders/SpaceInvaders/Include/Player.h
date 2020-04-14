@@ -32,5 +32,5 @@ private:
 	float baseHeight = (float)Screen::height - 40.0f; // Set player position base heigth to 40
 	sf::RectangleShape player;
 	sf::Vector2f playerVelocity;
-	ResourceManager resourceManager;
+	ResourceManager playerResourceManager;
 };

@@ -3,12 +3,12 @@
 #include <iostream> // DEBUGING PURPOSES ! DELETE LATER !
 
 EnemyControler::EnemyControler() : moveTimeGap(sf::seconds(0.75f))
+, enemyAnimator(Enemy::enemyWidth, Enemy::enemyHeight, enemyResourceManager.loadTexture("enemySheet"))
 {
 	Enemy::Type types[] = {
 		Enemy::Type::Squid, Enemy::Type::Crab, Enemy::Type::Crab,
 		Enemy::Type::Octopus, Enemy::Type::Octopus
 	};
-
 
 	for (int y = 0; y < row; y++) { // Add enemies to the vector
 		for (int x = 0; x < column; x++){
@@ -23,6 +23,7 @@ void EnemyControler::moveEnemies()
 {
 	if (moveTimer.getElapsedTime() > moveTimeGap) {
 		steps++; // DEBUGING PURPOSES ! DELETE LATER !
+		enemyAnimator.nextFrame();
 		bool isMovingDown = false;
 		if (moveLeft) {
 			moveSpeed = -10.0f;
@@ -59,7 +60,10 @@ void EnemyControler::moveEnemies()
 void EnemyControler::drawEnemies(sf::RenderWindow& window)
 {
 	for (auto& enemy : enemies) {
-		enemy.drawEnemy(window);
+		//enemy.drawEnemy(window);
+		if (enemy.isAlive()) {
+			enemyAnimator.renderEnemy(window, (int)enemy.getType(), enemy.getSpritePosition());
+		}
 	}
 }
 
