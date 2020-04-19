@@ -14,9 +14,11 @@ public:
 	EnemyControler();
 	void moveEnemies();
 	void drawEnemies(sf::RenderWindow& window);
+	int getAliveEnemies();
 	void destroyEnemy();
 	bool checkBulletCollisions(std::vector<Bullet>& bullets);
 	sf::Vector2f randomLowestEnemyPosition();
+	sf::Vector2f lowestRightestEnemyPosition();
 	std::vector<sf::Vector2f> bulletCollision(std::vector<Bullet>& bullets);
 
 	ResourceManager enemyResourceManager;

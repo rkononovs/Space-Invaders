@@ -26,11 +26,11 @@ void EnemyControler::moveEnemies()
 		enemyAnimator.nextFrame();
 		bool isMovingDown = false;
 		if (moveLeft) {
-			moveSpeed = -10.0f;
+			moveSpeed = -20.0f;
 		}
 		else if(!moveLeft)
 		{
-			moveSpeed = 10.0f;
+			moveSpeed = 20.0f;
 		}
 
 		if (moveDown) {
@@ -67,6 +67,11 @@ void EnemyControler::drawEnemies(sf::RenderWindow& window)
 	}
 }
 
+int EnemyControler::getAliveEnemies()
+{
+	return aliveEnemies;
+}
+
 /*void EnemyControler::destroyEnemy()                   /// For now I don't need this function, but I may use it later. ///
 {
 	for (auto iterator = begin(enemies); iterator != end(enemies);) {
@@ -81,12 +86,16 @@ void EnemyControler::drawEnemies(sf::RenderWindow& window)
 	}
 }*/ 
 
-bool EnemyControler::checkBulletCollisions(std::vector<Bullet>& bullets) {
+
+// !!!! CHECK IF THIS FUNCTION IS NEEDED !!!!
+// As of right know I have no idea what it actually does
+/*bool EnemyControler::checkBulletCollisions(std::vector<Bullet>& bullets) {
 	for (auto& bullet : bullets) {
 		for (auto& enemy : enemies) {
 			if (enemy.isAlive()) {
 				if (bullet.isColliding(enemy)) {
-					return true;
+					aliveEnemies--;
+			//		return true;
 				}
 				else {
 					return false;
@@ -97,7 +106,7 @@ bool EnemyControler::checkBulletCollisions(std::vector<Bullet>& bullets) {
 			}
 		}
 	}
-}
+}*/
 
 sf::Vector2f EnemyControler::randomLowestEnemyPosition()
 {
@@ -112,6 +121,25 @@ sf::Vector2f EnemyControler::randomLowestEnemyPosition()
 					enemy.getSpritePosition().x + enemy.enemyWidth / 2,
 					enemy.getSpritePosition().y + enemy.enemyHeight + 5
 				};
+			}
+		}
+	}
+}
+
+sf::Vector2f EnemyControler::lowestRightestEnemyPosition()
+{
+	while (true) {
+		for (int y = row - 1; y >= 0; y--) {
+			for(int x = column -1; x >=0; x--){
+				int index = y * column + x;
+				auto& enemy = enemies.at(index);
+				if (enemy.isAlive()) {
+					return
+					{
+						enemy.getSpritePosition().x + enemy.enemyWidth / 2,
+						enemy.getSpritePosition().y + enemy.enemyHeight + 5
+					};
+				}
 			}
 		}
 	}
@@ -144,5 +172,3 @@ std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& b
 
 	return killedEnemyPosition;
 }
-
-// Fix collision box

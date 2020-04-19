@@ -94,3 +94,27 @@ void GameManager::update()
 	player.updatePlayer();
 	enemy.moveEnemies();
 }
+
+bool GameManager::won()
+{
+	if (enemy.getAliveEnemies() == 0) {
+		return true;
+	}
+
+	return false;
+}
+
+bool GameManager::isGameLost()
+{
+	if (player.getLives() == 0) {
+		return true;
+	}
+	
+	if (enemy.lowestRightestEnemyPosition().y >= player.getSpritePosition().y) {
+		std::cout << enemy.lowestRightestEnemyPosition().y << std::endl;
+		std::cout << player.getSpritePosition().y << std::endl;
+		return true;
+	}
+
+	return false;
+}

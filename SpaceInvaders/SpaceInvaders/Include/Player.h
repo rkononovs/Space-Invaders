@@ -17,6 +17,7 @@ public:
 	void updatePlayer();
 	void onCollision(Collidable& object);
 	void revivePlayer();
+	int getLives();
 
 	bool isAlive();
 
@@ -26,6 +27,7 @@ public:
 	constexpr static float playerHeight = 30.0f; // SAME
 private:
 	int speed = 1;
+	int lives = 3;
 
 	bool isPlayerAlive = true;
 

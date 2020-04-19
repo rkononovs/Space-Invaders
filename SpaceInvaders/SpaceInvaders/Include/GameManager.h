@@ -16,6 +16,9 @@ public:
 	void getPlayerShootInput();
 	void draw(sf::RenderWindow& window);
 	void update();
+	bool won();
+	bool isGameLost();
+
 private:
 	void enemyShoot();
 	void updateBullet();

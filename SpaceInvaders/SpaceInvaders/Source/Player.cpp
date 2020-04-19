@@ -47,6 +47,7 @@ void Player::updatePlayer()
 void Player::onCollision(Collidable& object)
 {
 	isPlayerAlive = false;
+	lives--;
 }
 
 void Player::revivePlayer()
@@ -54,6 +55,11 @@ void Player::revivePlayer()
 	isPlayerAlive = true;
 	player.setPosition(Screen::width / 2, baseHeight);
 
+}
+
+int Player::getLives()
+{ 
+	return lives;
 }
 
 bool Player::isAlive()
