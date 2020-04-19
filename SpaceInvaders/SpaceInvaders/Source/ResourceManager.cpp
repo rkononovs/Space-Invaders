@@ -1,5 +1,4 @@
 #include "..\Include\ResourceManager.h"
-#include <iostream>
 
 sf::Texture& ResourceManager::loadTexture(const std::string& fileName)
 {
@@ -13,8 +12,8 @@ sf::Font& ResourceManager::loadFont(const std::string& fileName)
 	return fonts;
 }
 
-/*sf::SoundBuffer& ResourceManager::loadSound(const std::string& fileName)
+sf::SoundBuffer& ResourceManager::loadSound(const std::string& fileName)
 {
-	//sounds.load
-	//return sounds;
-}*/
+	sounds.loadFromFile(".\\Audio\\" + fileName + ".wav");
+	return sounds;
+}

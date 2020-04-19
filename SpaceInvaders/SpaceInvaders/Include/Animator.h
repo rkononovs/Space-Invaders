@@ -1,5 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+/*
+	Class for animating enemy movement
+*/
 
 class Animator
 {

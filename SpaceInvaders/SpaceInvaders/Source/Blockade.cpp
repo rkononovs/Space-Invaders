@@ -1,5 +1,4 @@
 #include "../Include/Blockade.h"
-#include <iostream>
 
 Blockade::Blockade(sf::Vector2f startingPosition) : Collidable(blockadesWidth, blockadesHeight), newPosition(startingPosition)
 {
@@ -10,7 +9,6 @@ Blockade::Blockade(sf::Vector2f startingPosition) : Collidable(blockadesWidth, b
 
 void Blockade::onCollision(Collidable& other)
 {
-
 	healthLeft--;
 
 	if (healthLeft <= 0) {

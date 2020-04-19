@@ -1,9 +1,9 @@
 #include "../Include/GameManager.h"
-#include <iostream> // DEBUGING PURPOSES ! DELETE LATER !
 
 GameManager::GameManager()
 {
-
+	invaderShot.setBuffer(gameResourceManager.loadSound("invaderBullet"));
+	shipShot.setBuffer(gameResourceManager.loadSound("shipBullet"));
 }
 
 void GameManager::input()
@@ -20,21 +20,21 @@ void GameManager::input()
 void GameManager::getPlayerShootInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && playerShotDelay.getElapsedTime().asSeconds() > 1.0f) {
-			std::cout << "SHOOT" << std::endl; // DEBUGING PURPOSES ! DELETE LATER 
 			auto bulletPosition = player.getSpritePosition();
 			bulletPosition.y -= Bullet::bulletHeight; // Change y so bullet doesn't spawn inside player and kill him
 			bulletPosition.x += player.playerWidth / 2; // Change x so bullet shoots from middle
 			bullets.emplace_back(bulletPosition, Bullet::Direction::Up);
-			std::cout << playerShotDelay.getElapsedTime().asSeconds() << std::endl;
+			shipShot.play();
 			playerShotDelay.restart();
 		}
 }
 
 void GameManager::enemyShoot()
 {
-	if (enemyShotDelay.getElapsedTime().asSeconds() > 0.25f && (rand() % 10 == 5)) {
+	if (enemyShotDelay.getElapsedTime().asSeconds() > 0.25f && (rand() % 10 == 5)) { // randomize shooting interval
 		sf::Vector2f point = enemy.randomLowestEnemyPosition();
 		bullets.emplace_back(point, Bullet::Direction::Down);
+		invaderShot.play();
 		enemyShotDelay.restart();
 	}
 }
@@ -44,7 +44,7 @@ void GameManager::updateBullet()
 	for (auto iterator = begin(bullets); iterator != end(bullets);) {
 		auto& bullet = *iterator;
  		if (bullet.isBulletActive()) {
-			if (bullet.isColliding(player)) {
+			if (bullet.isColliding(player)) { // If bullet collided with player clear screen of bulletss
 				bullets.clear();
 				return;
 			}
@@ -57,14 +57,11 @@ void GameManager::updateBullet()
 	}
 }
 
-std::vector<sf::Vector2f> GameManager::getCollisionPoints()
+std::vector<sf::Vector2f> GameManager::getCollisionPoints() // returns collision points, was intended to use for emplacing explosions to collision points
 {
 	auto collisionPoint = enemy.bulletCollision(bullets);
 	auto blockadeCollision = blockade.bulletCollision(bullets);
-//	if (enemy.checkBulletCollisions(bullets)) {
-		//enemy.destroyEnemy();
-		//playerShotDelay.restart();
-//	}
+
 	updateBullet();
 	
 	return collisionPoint;
@@ -111,8 +108,6 @@ bool GameManager::isGameLost()
 	}
 	
 	if (enemy.lowestRightestEnemyPosition().y >= player.getSpritePosition().y) {
-		std::cout << enemy.lowestRightestEnemyPosition().y << std::endl;
-		std::cout << player.getSpritePosition().y << std::endl;
 		return true;
 	}
 

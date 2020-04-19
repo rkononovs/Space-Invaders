@@ -1,5 +1,7 @@
 #pragma once
-
+/*
+	Header file for screen size
+*/
 namespace Screen
 {
 	constexpr unsigned width = 1000;

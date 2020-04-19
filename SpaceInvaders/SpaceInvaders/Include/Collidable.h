@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+/*
+	Class for every collidable in the game
+*/
 class Collidable
 {
 public:

@@ -3,13 +3,15 @@
 
 #include "../Include/Collidable.h"
 #include "../Include/ScreenInfo.h"
+/*
+	Class for blockade
+*/
 class Blockade : public Collidable
 {
 public:
-	enum class Stages {
-		Destroyed, Partial, Complete
-	};
+
 	Blockade(sf::Vector2f startingPosition);
+
 	void onCollision(Collidable& object);
 	void drawBlockade(sf::RenderWindow& window);
 	
@@ -18,6 +20,7 @@ public:
 	const sf::Vector2f& getSpritePosition();
 
 	bool isBlockadeActive = true;
+
 	constexpr static float blockadesWidth = 75.0f;
 	constexpr static float blockadesHeight = 75.0f;
 private:
@@ -25,7 +28,4 @@ private:
 
 	sf::RectangleShape blockade;
 	sf::Vector2f newPosition;
-
-	Stages damageStages;
-
 };

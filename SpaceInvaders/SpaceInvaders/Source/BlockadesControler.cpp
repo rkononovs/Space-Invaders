@@ -1,10 +1,8 @@
 #include "..\Include\BlockadesControler.h"
 
-#include <iostream>
-
 BlockadesControler::BlockadesControler()
 {
-	for (int x = 0; x < blockadesAmount; x++) {
+	for (int x = 0; x < blockadesAmount; x++) { // Spawn all blockades
 		float blockadesX = x * 50 + (gapBetweenBlockades * x * 3) + Blockade::blockadesWidth;
 		blockades.emplace_back(sf::Vector2f{ blockadesX, baseBlockadesHeight });
 	}

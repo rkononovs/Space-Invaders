@@ -1,6 +1,6 @@
 #include "../Include/GUI.h"
 
-GUI::GUI()
+GUI::GUI() // Set text
 {
 	gameOver.setFont(GUIResourceManager.loadFont("unifont"));
 	gameOver.setString("GAME OVER");

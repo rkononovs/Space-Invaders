@@ -1,6 +1,5 @@
 #include "../Include/EnemyControler.h"
 #include <stdlib.h> // For rand() function
-#include <iostream> // DEBUGING PURPOSES ! DELETE LATER !
 
 EnemyControler::EnemyControler() : moveTimeGap(sf::seconds(0.75f))
 , enemyAnimator(Enemy::enemyWidth, Enemy::enemyHeight, enemyResourceManager.loadTexture("enemySheet"))
@@ -12,17 +11,18 @@ EnemyControler::EnemyControler() : moveTimeGap(sf::seconds(0.75f))
 
 	for (int y = 0; y < row; y++) { // Add enemies to the vector
 		for (int x = 0; x < column; x++){
-			float enemyX = x * 40 + (gapBetweenEnemies * x * 3) + Enemy::enemyWidth; // TODO Change 40 to invader width
-			float enemyY = y * 40 + (gapBetweenEnemies * y) + Enemy::enemyHeight; // TODO Change 40 to invader height
+			float enemyX = x * 40 + (gapBetweenEnemies * x * 3) + Enemy::enemyWidth; // Make gap between them on X axis
+			float enemyY = y * 40 + (gapBetweenEnemies * y) + Enemy::enemyHeight; // Make gap between them on Y axis
 			enemies.emplace_back(sf::Vector2f{ enemyX, enemyY }, types[y]);
 		}
 	}
+
+	invaderHit.setBuffer(enemyResourceManager.loadSound("invaderHit"));
 }
 
 void EnemyControler::moveEnemies()
 {
-	if (moveTimer.getElapsedTime() > moveTimeGap) {
-		steps++; // DEBUGING PURPOSES ! DELETE LATER !
+	if (moveTimer.getElapsedTime() > moveTimeGap) { // Move enemies each 0.75 seconds / See line 5 /
 		enemyAnimator.nextFrame();
 		bool isMovingDown = false;
 		if (moveLeft) {
@@ -41,9 +41,9 @@ void EnemyControler::moveEnemies()
 		for (auto& enemy : enemies) {
 			enemy.moveEnemy(moveSpeed, 0.0f);
 			if (moveDown) {
-				enemy.moveEnemy(0.0f, 20.0f); // TODO Later change 20 to variable 
+				enemy.moveEnemy(0.0f, 20.0f);
 			}
-			else if (!isMovingDown) {
+			else if (!isMovingDown) { // Check if is near screen
 				isMovingDown = ((enemy.getSpritePosition().x < 10 && moveLeft) 
 					|| (enemy.getSpritePosition().x + Enemy::enemyWidth > Screen::width - 10 && !moveLeft));
 			}
@@ -51,7 +51,7 @@ void EnemyControler::moveEnemies()
 		if (moveDown) {
 			moveLeft = !moveLeft;
 		}
-		std::cout << "Horizontal steps: " << steps << std::endl; // DEBUGING PURPOSES ! DELETE LATER !
+
 		moveDown = isMovingDown;
 		moveTimer.restart();
 	}
@@ -60,7 +60,6 @@ void EnemyControler::moveEnemies()
 void EnemyControler::drawEnemies(sf::RenderWindow& window)
 {
 	for (auto& enemy : enemies) {
-		//enemy.drawEnemy(window);
 		if (enemy.isAlive()) {
 			enemyAnimator.renderEnemy(window, (int)enemy.getType(), enemy.getSpritePosition());
 		}
@@ -71,42 +70,6 @@ int EnemyControler::getAliveEnemies()
 {
 	return aliveEnemies;
 }
-
-/*void EnemyControler::destroyEnemy()                   /// For now I don't need this function, but I may use it later. ///
-{
-	for (auto iterator = begin(enemies); iterator != end(enemies);) {
-		auto& enemy = *iterator;
-		if (enemy.isAlive()) {
-			iterator++;
-		}
-		else {
-			std::cout << "Enemy Destroyed" << std::endl;
-			iterator = enemies.erase(iterator);
-		}
-	}
-}*/ 
-
-
-// !!!! CHECK IF THIS FUNCTION IS NEEDED !!!!
-// As of right know I have no idea what it actually does
-/*bool EnemyControler::checkBulletCollisions(std::vector<Bullet>& bullets) {
-	for (auto& bullet : bullets) {
-		for (auto& enemy : enemies) {
-			if (enemy.isAlive()) {
-				if (bullet.isColliding(enemy)) {
-					aliveEnemies--;
-			//		return true;
-				}
-				else {
-					return false;
-				}
-			}
-			else {
-				false;
-			}
-		}
-	}
-}*/
 
 sf::Vector2f EnemyControler::randomLowestEnemyPosition()
 {
@@ -145,17 +108,6 @@ sf::Vector2f EnemyControler::lowestRightestEnemyPosition()
 	}
 }
 
-/* for (auto iterator = begin(bullets); iterator != end(bullets);) {
-	auto& bullet = *iterator;
-	if (bullet.isBulletActive()) {
-		bullet.updateBullet();
-		iterator++;
-	}
-	else {
-		iterator = bullets.erase(iterator);
-	}
-}  */
-
 std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& bullets)
 {
 	std::vector<sf::Vector2f> killedEnemyPosition;
@@ -164,6 +116,7 @@ std::vector<sf::Vector2f> EnemyControler::bulletCollision(std::vector<Bullet>& b
 			if (enemy.isAlive()) {
 				if (bullet.isColliding(enemy)) {
 					aliveEnemies--;
+					invaderHit.play();
 					killedEnemyPosition.emplace_back(enemy.getSpritePosition());
 				}
 			}

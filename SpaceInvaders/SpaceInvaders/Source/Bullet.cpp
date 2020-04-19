@@ -1,7 +1,5 @@
 #include "../Include/Bullet.h"
 
-#include <iostream> // FOR TESTING PURPOSES
-
 Bullet::Bullet(sf::Vector2f& position, Direction direction) : Collidable(bulletWidth, bulletHeight), bulletPosition(position), bulletDirection(direction)
 {
 }
@@ -18,7 +16,6 @@ void Bullet::drawBullet(sf::RenderWindow& window)
 void Bullet::destroy()
 {
 	isActive = false;
-	std::cout << "Bullet is destroyed" << std::endl; // FOR TESTING PURPOSES
 }
 
 void Bullet::onCollision(Collidable& object)

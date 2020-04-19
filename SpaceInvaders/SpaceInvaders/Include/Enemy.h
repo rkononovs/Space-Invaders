@@ -13,10 +13,12 @@ public:
 		Crab, Octopus, Squid
 	};
 	Enemy(sf::Vector2f startingPosition, Type type);
+
 	void drawEnemy(sf::RenderWindow& window);
 	void moveEnemy(float x, float y);
 	void onCollision(Collidable& object);
 	void revive();
+
 	bool isAlive();
 
 	sf::FloatRect getCollisionBox();

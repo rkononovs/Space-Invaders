@@ -3,8 +3,9 @@
 // Set initial player parameters
 Player::Player() : Collidable(playerWidth, playerHeight)
 {
+	shipHit.setBuffer(playerResourceManager.loadSound("shipHit"));
+
 	player.setSize(sf::Vector2f(playerWidth, playerHeight));
-	//player.setOrigin(player.getSize().x / 2.0f, player.getSize().y / 2.0f);
 	player.setPosition(Screen::width / 2, baseHeight);
 	player.setFillColor(sf::Color::Green);
 	player.setTexture(&playerResourceManager.loadTexture("Player"));
@@ -32,7 +33,7 @@ void Player::updatePlayer()
 		player.move(playerVelocity);
 		
 		playerVelocity.x *= 0.90; // Decrease velocity so player won't move forever
-		if (player.getPosition().x <= 0) {
+		if (player.getPosition().x <= 0) { // Check if player is colliding with screen edge
 			playerVelocity.x = 1.0f;
 			player.setPosition(-1.0f, baseHeight);
 		}
@@ -47,14 +48,14 @@ void Player::updatePlayer()
 void Player::onCollision(Collidable& object)
 {
 	isPlayerAlive = false;
+	shipHit.play();
 	lives--;
 }
 
 void Player::revivePlayer()
 {
 	isPlayerAlive = true;
-	player.setPosition(Screen::width / 2, baseHeight);
-
+	player.setPosition(Screen::width / 2, baseHeight); // When player revived put him in the middle
 }
 
 int Player::getLives()

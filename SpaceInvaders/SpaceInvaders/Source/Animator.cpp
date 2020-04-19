@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../Include/Animator.h"
 
 Animator::Animator(float width, float height, const sf::Texture& sprite)
@@ -14,6 +13,7 @@ void Animator::nextFrame()
 
 void Animator::renderEnemy(sf::RenderTarget& target, int type, const sf::Vector2f& position)
 {
+	// Calculate sprite from spriteSheet using coordinates
 	int texCordTop = (type * frameHeight);
 	int texCordLeft = frameWidth * (currentFrame % 2);
 	enemyObj.setPosition(position);

@@ -1,7 +1,5 @@
 #include "../Include/Enemy.h"
 
-#include <iostream>
-
 Enemy::Enemy(sf::Vector2f startingPosition, Type type) : Collidable(enemyWidth, enemyHeight), newPosition(startingPosition), enemyType(type), startingPosition(startingPosition)
 {
 }
@@ -25,7 +23,6 @@ void Enemy::moveEnemy(float x, float y)
 void Enemy::onCollision(Collidable& object)
 {
 	isEnemyAlive = false;
-	std::cout << "Colliding" << std::endl;
 }
 
 const sf::Vector2f& Enemy::getSpritePosition()

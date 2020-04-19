@@ -4,7 +4,9 @@
 #include "Include/ScreenInfo.h"
 #include "Include/GameManager.h"
 #include "Include/GUI.h"
-
+/*
+Used it as main display for my game
+*/
 int main()
 {
 
@@ -13,7 +15,6 @@ int main()
 
 	GUI interface;
 	GameManager game;
-	
 
 	window.setFramerateLimit(60);
 
@@ -26,12 +27,9 @@ int main()
 				window.close();
 			}
 		}
-		/*while (game.won()) {
-		}
-		while (game.isGameLost()) {
-		}*/
+
 		window.clear(sf::Color::Black);
-		//if()
+
 		if (!game.isGameLost() && !game.won()) {
 			game.draw(window);
 			game.input();

@@ -12,27 +12,32 @@ class Player : public Collidable
 {
 public:
 	Player();
+
 	void drawPlayer(sf::RenderWindow &window);
 	void getMoveInput();
 	void updatePlayer();
 	void onCollision(Collidable& object);
 	void revivePlayer();
+
 	int getLives();
 
 	bool isAlive();
 
 	const sf::Vector2f& getSpritePosition();
 
-	constexpr static float playerWidth = 30.0f; // TODO: CHANGE TO RIGHT VALUE
-	constexpr static float playerHeight = 30.0f; // SAME
+	constexpr static float playerWidth = 32.0f;
+	constexpr static float playerHeight = 22.0f;
 private:
 	int speed = 1;
 	int lives = 3;
 
 	bool isPlayerAlive = true;
 
-	float baseHeight = (float)Screen::height - 40.0f; // Set player position base heigth to 40
+	float baseHeight = (float)Screen::height - 40.0f; 
+
 	sf::RectangleShape player;
 	sf::Vector2f playerVelocity;
+	sf::Sound shipHit;
+
 	ResourceManager playerResourceManager;
 };

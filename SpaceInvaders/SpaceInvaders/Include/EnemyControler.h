@@ -6,19 +6,23 @@
 #include "../Include/ResourceManager.h"
 
 #include <vector>
-
+/*
+	Class that governs all enemies
+*/
 class EnemyControler
 {
 public:
 
 	EnemyControler();
+
 	void moveEnemies();
 	void drawEnemies(sf::RenderWindow& window);
+
 	int getAliveEnemies();
-	void destroyEnemy();
-	bool checkBulletCollisions(std::vector<Bullet>& bullets);
+
 	sf::Vector2f randomLowestEnemyPosition();
 	sf::Vector2f lowestRightestEnemyPosition();
+
 	std::vector<sf::Vector2f> bulletCollision(std::vector<Bullet>& bullets);
 
 	ResourceManager enemyResourceManager;
@@ -27,17 +31,18 @@ private:
 
 	int row = 5;
 	int column = 11;
-	int aliveEnemies = row * column; // Maybe refracture
-	int stepDown; // DEBUGING PURPOSES ! DELETE LATER !
-	int steps; // DEBUGING PURPOSES ! DELETE LATER !
+	int aliveEnemies = row * column;
 
 	bool moveDown = false;
 	bool moveLeft = false;
 
 	float moveSpeed;
 
+	sf::Sound invaderHit;
 	sf::Clock moveTimer;
 	sf::Time moveTimeGap;
+
 	Animator enemyAnimator;
+
 	std::vector<Enemy> enemies;
 };
